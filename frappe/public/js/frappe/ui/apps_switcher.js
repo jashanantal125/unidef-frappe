@@ -118,6 +118,12 @@ frappe.ui.AppsSwitcher = class AppsSwitcher {
 	}
 	// refactor them into one single function
 	add_website_select() {
+		// Hide Website for users without System Manager or Administrator role
+		const user_roles = frappe.boot.user.roles || [];
+		if (!user_roles.includes("System Manager") && !user_roles.includes("Administrator")) {
+			return;
+		}
+		
 		$(`<div class="divider"></div>`).appendTo(this.app_switcher_menu);
 		this.add_app_item(
 			{
@@ -131,6 +137,12 @@ frappe.ui.AppsSwitcher = class AppsSwitcher {
 	}
 
 	add_settings_select() {
+		// Hide Settings for users without System Manager or Administrator role
+		const user_roles = frappe.boot.user.roles || [];
+		if (!user_roles.includes("System Manager") && !user_roles.includes("Administrator")) {
+			return;
+		}
+		
 		$(`<div class="divider"></div>`).appendTo(this.app_switcher_menu);
 		this.add_app_item({
 			app_name: "settings",

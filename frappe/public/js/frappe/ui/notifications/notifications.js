@@ -52,18 +52,6 @@ frappe.ui.Notifications = class Notifications {
 				view: NotificationsView,
 				el: this.panel_notifications,
 			},
-			{
-				label: __("Events"),
-				id: "todays_events",
-				view: EventsView,
-				el: this.panel_events,
-			},
-			{
-				label: __("What's New"),
-				id: "changelog_feed",
-				view: ChangelogFeedView,
-				el: this.panel_changelog_feed,
-			},
 		];
 
 		let get_headers_html = (item) => {

@@ -158,6 +158,12 @@ def load_desktop_data(bootinfo):
 	Module = frappe.qb.DocType("Module Def")
 
 	for app_name in frappe.get_installed_apps():
+		# Hide Frappe Framework for users without System Manager or Administrator role
+		if app_name == "frappe":
+			user_roles = frappe.get_roles()
+			if "System Manager" not in user_roles and "Administrator" not in user_roles:
+				continue
+		
 		# get app details from app_info (/apps)
 		apps = frappe.get_hooks("add_to_apps_screen", app_name=app_name)
 		app_info = {}

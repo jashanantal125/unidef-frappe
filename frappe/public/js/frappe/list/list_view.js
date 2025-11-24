@@ -402,7 +402,8 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		this.columns = this.columns.concat(
 			fields_in_list_view
 				.filter((df) => {
-					if (frappe.has_indicator(this.doctype) && df.fieldname === "status") {
+					// Allow status field if it has in_list_view explicitly set (e.g., for Lead)
+					if (frappe.has_indicator(this.doctype) && df.fieldname === "status" && !df.in_list_view) {
 						return false;
 					}
 					if (!df.in_list_view || df.is_virtual) {
