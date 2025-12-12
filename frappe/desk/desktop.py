@@ -469,6 +469,15 @@ def get_workspace_sidebar_items():
 	# Filter Page based on Permission
 	for page in all_pages:
 		try:
+			# Hide Selling workspace for CRM Admin role
+			if page.name == "Selling" and "CRM Admin" in frappe.get_roles():
+				continue
+			
+			# Hide University, Vendors, and Task Manager workspaces for agents role
+			user_roles = frappe.get_roles()
+			if page.name in ["University", "Vendors", "Task Manager"] and ("agents" in user_roles or "Agent" in user_roles):
+				continue
+			
 			workspace = Workspace(page, True)
 			if has_access or workspace.is_permitted():
 				if page.public and (has_access or not page.is_hidden) and page.title != "Welcome Workspace":

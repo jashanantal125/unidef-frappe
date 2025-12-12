@@ -44,6 +44,14 @@ def get_context(context):
 	if frappe.get_system_settings("enable_telemetry") and os.getenv("FRAPPE_SENTRY_DSN"):
 		app_include_js.append("sentry.bundle.js")
 
+	# Get splash_image from hooks or Website Settings
+	hooks_website_context = hooks.get("website_context", {})
+	splash_image = (
+		frappe.get_website_settings("splash_image")
+		or hooks_website_context.get("splash_image")
+		or "/assets/frappe/images/frappe-framework-logo.svg"
+	)
+	
 	context.update(
 		{
 			"no_cache": 1,
@@ -62,6 +70,7 @@ def get_context(context):
 			"app_name": (
 				frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or "Frappe"
 			),
+			"splash_image": splash_image,
 		}
 	)
 
