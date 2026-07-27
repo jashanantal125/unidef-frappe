@@ -49,7 +49,7 @@ frappe.ui.AppsSwitcher = class AppsSwitcher {
 	add_app_item(app) {
 		$(`<div class="app-item" data-app-name="${app.app_name}"
 			data-app-route="${app.app_route}">
-			<a>
+			<a style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;">
 				<div class="sidebar-item-icon">
 					<img
 						class="app-logo"
@@ -57,7 +57,7 @@ frappe.ui.AppsSwitcher = class AppsSwitcher {
 						alt="${__("App Logo")}"
 					>
 				</div>
-				<span class="app-item-title">${app.app_title}</span>
+				<span class="app-item-title" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;">${app.app_title}</span>
 			</a>
 		</div>`).appendTo(this.app_switcher_menu);
 	}
@@ -78,7 +78,7 @@ frappe.ui.AppsSwitcher = class AppsSwitcher {
 		$(`<div class="divider"></div>`).prependTo(this.app_switcher_menu);
 		$(`<div class="app-item" data-app-name="${app.app_name}"
 			data-app-route="${app.app_route}">
-			<a>
+			<a style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;">
 				<div class="sidebar-item-icon">
 					<img
 						class="app-logo"
@@ -86,7 +86,7 @@ frappe.ui.AppsSwitcher = class AppsSwitcher {
 						alt="${__("App Logo")}"
 					>
 				</div>
-				<span class="app-item-title">${app.app_title}</span>
+				<span class="app-item-title" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;">${app.app_title}</span>
 			</a>
 		</div>`).prependTo(this.app_switcher_menu);
 	}
