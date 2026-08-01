@@ -58,9 +58,24 @@ export default class LinksWidget extends Widget {
 			return "gray";
 		};
 
+		const get_row_icon = (item) => {
+			const link_type = (item.link_type || "").toLowerCase();
+			let icon = "es-line-filetype";
+			if (link_type === "report") {
+				icon = "es-line-reports";
+			} else if (link_type === "page") {
+				icon = "es-line-pages";
+			} else if (link_type === "dashboard") {
+				icon = "es-line-dashboard";
+			}
+			return `<span class="link-row-icon">${frappe.utils.icon(icon, "sm")}</span>`;
+		};
+
 		const get_link_for_item = (item) => {
 			if (is_link_disabled(item)) {
-				return `<span class="link-content ellipsis disabled-link">${item.link_title}</span>
+				return `<span class="link-content ellipsis disabled-link">${get_row_icon(item)}${
+					item.link_title
+				}</span>
 					<div class="module-link-popover popover fade top in" role="tooltip" style="display: none;">
 						<div class="arrow"></div>
 						<h3 class="popover-title" style="display: none;"></h3>
@@ -74,14 +89,15 @@ export default class LinksWidget extends Widget {
 			if (item.youtube_id)
 				return `
 					<span class="link-content help-video-link ellipsis" data-youtubeid="${item.youtube_id}">
-						${item.link_title}
+						${get_row_icon(item)}${item.link_title}
 					</span>
 				`;
 
 			return `
 				<span class="link-content ellipsis">
+					${get_row_icon(item)}
 					<span class="link-text">${item.link_title}</span>
-					${frappe.utils.icon("es-line-arrow-up-right", "xs", "", "", "ml-2")}
+					${frappe.utils.icon("es-line-arrow-up-right", "xs", "", "", "ml-2 link-row-arrow")}
 				</span>
 			`;
 		};
